@@ -1,0 +1,91 @@
+[
+  {
+    "title": "The Great Gatsby",
+    "cover_picture": "gatsby.jpg",
+    "description": "A novel by F. Scott Fitzgerald",
+    "long_description": "The story of the mysterious Jay Gatsby and his love for the beautiful Daisy Buchanan.",
+    "page_count": 218,
+    "authors": [
+      {
+        "name": "F. Scott Fitzgerald",
+        "description": "American novelist and short story writer",
+        "portrait": "fitzgerald.jpg"
+      }
+    ]
+  },
+  {
+    "title": "To Kill a Mockingbird",
+    "cover_picture": "mockingbird.jpg",
+    "description": "A novel by Harper Lee",
+    "long_description": "Set in the American South, the story explores themes of racial injustice and moral growth.",
+    "page_count": 324,
+    "authors": [
+      {
+        "name": "Harper Lee",
+        "description": "American novelist",
+        "portrait": "lee.jpg"
+      },
+      {
+        "name": "Harper Lee 2",
+        "description": "American novelist",
+        "portrait": "lee.jpg"
+      }
+    ]
+  },
+  {
+    "title": "1984",
+    "cover_picture": "1984.jpg",
+    "description": "A novel by George Orwell",
+    "long_description": "A dystopian tale set in a totalitarian society, exploring the dangers of government control.",
+    "page_count": 328,
+    "authors": [
+      {
+        "name": "George Orwell",
+        "description": "English novelist and essayist",
+        "portrait": "orwell.jpg"
+      }
+    ]
+  },
+  {
+    "title": "The Catcher in the Rye",
+    "cover_picture": "catcher.jpg",
+    "description": "A novel by J.D. Salinger",
+    "long_description": "Holden Caulfield's journey through New York City and his struggles with adolescence.",
+    "page_count": 224,
+    "authors": [
+      {
+        "name": "J.D. Salinger",
+        "description": "American writer",
+        "portrait": "salinger.jpg"
+      }
+    ]
+  },
+  {
+    "title": "Pride and Prejudice",
+    "cover_picture": "pride.jpg",
+    "description": "A novel by Jane Austen",
+    "long_description": "The classic tale of love, class, and manners in early 19th-century England.",
+    "page_count": 432,
+    "authors": [
+      {
+        "name": "Jane Austen",
+        "description": "English novelist",
+        "portrait": "austen.jpg"
+      }
+    ]
+  },
+  {
+    "title": "One Hundred Years of Solitude",
+    "cover_picture": "solitude.jpg",
+    "description": "A novel by Gabriel García Márquez",
+    "long_description": "The multi-generational saga of the Buendía family in the fictional town of Macondo.",
+    "page_count": 417,
+    "authors": [
+      {
+        "name": "Gabriel García Márquez",
+        "description": "Colombian novelist and short story writer",
+        "portrait": "marquez.jpg"
+      }
+    ]
+  }
+]

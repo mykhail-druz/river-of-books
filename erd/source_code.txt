@@ -1,0 +1,62 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table Book {
+  id integer
+
+  title varchar
+  cover_picture image
+  description varchar
+  long_description varchar
+  page_count integer
+
+  created_at timestamp
+}
+
+Table User {
+  id integer
+
+  username varchar
+  password varchar
+
+  name varchar
+  email varchar
+  role enum
+  description varchar
+  portrait image
+
+  created_at timestamp
+}
+
+Table Author {
+  id integer
+  name varchar
+  description varchar
+  portrait image
+
+  created_at timestamp
+}
+
+Table BookReview {
+  id integer
+
+  review varchar
+  rating integer
+
+  created_at timestamp
+}
+
+Table Tag {
+  id integer
+
+  name varchar
+  description varchar
+
+  created_at timestamp
+}
+
+Ref: Author.id <> Book.id
+Ref: User.id <> Book.id
+Ref: User.id < BookReview.id
+Ref: BookReview.id > Book.id
+Ref: Tag.id <> Book.id

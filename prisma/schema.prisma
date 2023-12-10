@@ -1,0 +1,120 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Book {
+  id       Int      @id @default(autoincrement())
+  authors  Author[]
+  shelved_by User[]
+  reviews BookReview[]
+  tags     Tag[]
+
+  title            String
+  cover_picture    String
+  // average_rating   Decimal TODO depending upon implementation
+  description      String
+  long_description String
+  page_count       Int
+  created_at       DateTime @default(now())
+}
+
+model User {
+  id          Int    @id @default(autoincrement())
+  shelved Book[]
+  book_reviews BookReview[]
+
+  sessions      Session[]
+  accounts      Account[]
+
+  // username    String
+  password    String?
+  name        String
+  email       String   @unique
+  emailVerified DateTime?
+  role        Role     @default(USER)
+  description String?
+  image    String
+  created_at  DateTime @default(now())
+}
+
+model BookReview {
+  id         Int      @id @default(autoincrement())
+  user_id Int
+  user User  @relation(fields: [user_id], references: [id])
+  book_id Int
+  book Book @relation(fields: [book_id], references: [id])
+
+  review     String
+  rating     Int
+  created_at DateTime @default(now())
+}
+
+model Author {
+  id    Int    @id @default(autoincrement())
+  books Book[]
+
+  name        String
+  description String
+  portrait    String
+  created_at  DateTime @default(now())
+}
+
+model Tag {
+  id    Int    @id @default(autoincrement())
+  books Book[]
+
+  name        String
+  description String
+  created_at  DateTime @default(now())
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+// ----------------------------- OAuth stuff
+
+// Auth.js
+model Account {
+  id                Int  @id @default(autoincrement())
+  userId            Int
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? // @db.Text
+  access_token      String? // @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? // @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           Int   @id @default(autoincrement())
+  sessionToken String   @unique
+  userId       Int
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}

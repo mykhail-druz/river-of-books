@@ -1,0 +1,47 @@
+{
+  "teamId": "23cac5d0-92ff-11ec-bd38-efdb6fa63305",
+  "fileId": "c29b5282-da70-8012-8003-712a09db0858",
+  "files": {
+    "c29b5282-da70-8012-8003-712a09db0858": {
+      "features": [],
+      "libraries": [],
+      "hasDeletedComponents": false,
+      "hasComponents": false,
+      "name": "New File 3",
+      "pagesIndex": {
+        "c29b5282-da70-8012-8003-712a09db0859": {
+          "name": "Discover"
+        },
+        "1de1c740-c7af-80b4-8003-713057790918": {
+          "name": "Empty browser page"
+        },
+        "6d98c77f-153a-80e1-8003-715592730d52": {
+          "name": "Discover -> Book details"
+        },
+        "6d98c77f-153a-80e1-8003-715fc793d7d0": {
+          "name": "Discover -> Author details"
+        },
+        "6d98c77f-153a-80e1-8003-716389749f65": {
+          "name": "Shelved"
+        },
+        "7c86c3d5-0423-800a-8003-716991710747": {
+          "name": "Profile"
+        }
+      },
+      "exportType": "detach",
+      "pages": [
+        "1de1c740-c7af-80b4-8003-713057790918",
+        "c29b5282-da70-8012-8003-712a09db0859",
+        "6d98c77f-153a-80e1-8003-715592730d52",
+        "6d98c77f-153a-80e1-8003-715fc793d7d0",
+        "6d98c77f-153a-80e1-8003-716389749f65",
+        "7c86c3d5-0423-800a-8003-716991710747"
+      ],
+      "hasMedia": false,
+      "shared": false,
+      "version": 2,
+      "hasTypographies": false,
+      "hasColors": false
+    }
+  }
+}
