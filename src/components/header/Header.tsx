@@ -1,16 +1,11 @@
-"use client";
 import React, { useState } from "react";
+import Link from "next/link";
 import { IoMdCompass } from "react-icons/io";
 import { FaStar } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 const Header = () => {
   const [activeItem, setActiveItem] = useState<number | null>(null);
-
-  const handleItemClick = (index: number) => {
-    setActiveItem(index);
-  };
 
   return (
     <header className="pt-12">
@@ -21,9 +16,9 @@ const Header = () => {
               activeItem === 0 ? "bg-purple-200" : "hover:bg-purple-100"
             } rounded-tl-box rounded-bl-box border-r border-gray-400`}
           >
-            <Link to="/" className="my-0.5 font-bold" onClick={() => handleItemClick(0)}>
+            <Link className="flex my-0.5 font-bold" href="/" passHref>
               <IoMdCompass className="text-purple-900" />
-              Discover
+              <p>Discover</p>
             </Link>
           </li>
           <li
@@ -31,9 +26,9 @@ const Header = () => {
               activeItem === 1 ? "bg-purple-200" : "hover:bg-purple-100"
             }`}
           >
-            <Link to="/shelved" className="my-0.5 font-bold" onClick={() => handleItemClick(1)}>
+            <Link className="flex my-0.5 font-bold" href="/shelved" passHref>
               <FaStar className="text-purple-900" />
-              Shelved
+              <p>Shelved</p>
             </Link>
           </li>
           <li
@@ -41,9 +36,9 @@ const Header = () => {
               activeItem === 2 ? "bg-purple-200" : "hover:bg-purple-100"
             } rounded-tr-box rounded-br-box border-l border-gray-400`}
           >
-            <Link to="/profile" className="my-0.5 font-bold" onClick={() => handleItemClick(2)}>
+            <Link className="flex my-0.5 font-bold" href="/profile" passHref>
               <FaUserCircle className="text-purple-900" />
-              Profile
+              <p>Profile</p>
             </Link>
           </li>
         </ul>

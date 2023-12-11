@@ -1,17 +1,19 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { resolve } from "path";
 import { IoBookOutline } from "react-icons/io5";
 import { IoMdTime } from "react-icons/io";
 import { FaRegSquare } from "react-icons/fa";
 import { FaRegCheckSquare } from "react-icons/fa";
+import { Dispatch, SetStateAction } from "react";
 
 import { Book as BookType } from "@prisma/client";
 import BookDescriptionModal from "./BookDescriptionModal";
+import AuthorModal from "../authorBlock/AuthorModal";
 
 type BookBlockProps = {
   bookId: number;
+  tag: string;
 };
 
 const calculateHoursAgo = (createdAt: Date) => {
@@ -24,15 +26,18 @@ const calculateHoursAgo = (createdAt: Date) => {
   return hoursAgo;
 };
 
-const BookBlock: React.FC<BookBlockProps> = ({bookId}) => {
+const BookBlock: React.FC<BookBlockProps> = ({ bookId }) => {
   const [book, setBook] = useState<BookType | null>(null);
   const [liked, setLiked] = useState(false);
   const [showDescriptionModal, setShowDescriptionModal] = useState(false);
+  const [showAuthorModal, setShowAuthorModal] = useState(false);
 
   useEffect(() => {
     fetch(`/api/book/${bookId}`)
       .then((response) => response.json())
-      .then((data) => setBook(data))
+      .then((data) => {
+        setBook(data);
+      })
       .catch((error) => console.error("Error fetching book:", error));
   }, [bookId]);
 
@@ -52,7 +57,14 @@ const BookBlock: React.FC<BookBlockProps> = ({bookId}) => {
     setShowDescriptionModal(false);
   };
 
-  console.log(book.cover_picture);
+  const handleOpenAuthorModal = () => {
+    setShowAuthorModal(true);
+  };
+
+  const handleCloseAuthorModal = () => {
+    setShowAuthorModal(false);
+  };
+
   return (
     <section className="flex w-full my-6">
       <div className=" flex bg-white border-purple-300 border-4 ">
@@ -74,9 +86,9 @@ const BookBlock: React.FC<BookBlockProps> = ({bookId}) => {
           </p>
           <p className="mx-auto font-semibold">
             by{" "}
-            <a className="text-purple-900">
+            <a className="text-purple-900" onClick={handleOpenAuthorModal}>
               {book.authors &&
-                book.authors.map((author) => author.name).join(", ")}
+                book.authors.map((author: { name: any; }) => author.name).join(", ")}
             </a>
           </p>
           <p className="font-medium">{book.description}</p>
@@ -112,17 +124,19 @@ const BookBlock: React.FC<BookBlockProps> = ({bookId}) => {
             </li>
           </ul>
           <div className="bg-purple-200 rounded-full py-2 px-4 shadow-md text-purple-800">
-            {book.tags && book.tags.map((tag) => tag.name).join(", ")}
+            {book.tags && book.tags.map((tag: { name: any; }) => tag.name).join(", ")}
           </div>
-
         </div>
-                  {showDescriptionModal && (
-            <BookDescriptionModal
+        {showDescriptionModal && (
+          <BookDescriptionModal
             bookId={bookId}
-              book={book}
-              onClose={handleCloseDescriptionModal}
-            />
-          )}
+            book={book}
+            onClose={handleCloseDescriptionModal}
+          />
+        )}
+        {showAuthorModal && (
+          <AuthorModal bookId={bookId} onClose={handleCloseAuthorModal} />
+        )}
       </div>
     </section>
   );

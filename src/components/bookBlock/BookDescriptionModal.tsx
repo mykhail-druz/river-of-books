@@ -49,9 +49,13 @@ const BookDescriptionModal: React.FC<BookDescriptionModalProps> = ({
   if (!book) {
     return <div>Loading...</div>;
   }
+
+  console.log(book.reviews && book.reviews.map((review: { review: any; }) => review.review).join(", "))
+
   return (
-    <div className="fixed -top-[150px] -right-[450px] w-full h-screen flex items-center justify-center">
-      <div className="relative flex items-center justify-center bg-white border-8 border-purple-200">
+    <div className="fixed w-full h-screen flex items-center justify-center">
+      <div className="h-full w-full absolute z-10" onClick={handleCloseClick}></div>
+      <div className="relative z-20 -top-[25%] right-[5%] flex items-center justify-center bg-white border-8 border-purple-200">
         <button
           onClick={handleCloseClick}
           className="absolute top-0 right-0 mr-2 text-black cursor-pointer"
@@ -73,7 +77,7 @@ const BookDescriptionModal: React.FC<BookDescriptionModalProps> = ({
           <p className="mx-auto font-semibold text-purple-900">
             by{" "}
             {book.authors &&
-              book.authors.map((author) => author.name).join(", ")}
+              book.authors.map((author: { name: any; }) => author.name).join(", ")}
           </p>
           <p className="font-medium">{book.long_description}</p>
           <ul className="flex py-4 items-center space-x-8 font-medium">
@@ -108,11 +112,11 @@ const BookDescriptionModal: React.FC<BookDescriptionModalProps> = ({
             </li>
           </ul>
           <div className="bg-purple-200 rounded-full py-2 px-4 shadow-md text-purple-800">
-            {book.tags && book.tags.map((tag) => tag.name).join(", ")}
+            {book.tags && book.tags.map((tag: { name: any; }) => tag.name).join(", ")}
           </div>
           <div className="flex-col pt-4">
             <p className="font-bold">Reviews</p>
-            <div></div>
+            <p>{book.reviews && book.reviews.map((review: { rating: any; }) => review).join(", ")}</p>
           </div>
         </div>
       </div>

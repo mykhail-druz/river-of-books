@@ -1,5 +1,5 @@
 import db from "@/server/db";
-import { Author, Book } from "@prisma/client";
+import { Author, Book, BookReview } from "@prisma/client";
 
 export const getAllBooks = async (from: number, limit: number) => {
   return await db.book.findMany({
@@ -54,4 +54,22 @@ export const addBooks = async (
   );
 
   return createdBooks;
+};
+
+export const addReview = async (review: BookReview) => {
+  console.log(review);
+  return await db.book.update({
+    where: {
+      id: review.book_id,
+    },
+    data: {
+      reviews: {
+        create: {
+          user_id: review.user_id,
+          review: review.review,
+          rating: review.rating,
+        },
+      },
+    },
+  });
 };

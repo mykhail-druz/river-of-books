@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import React from "react";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from './providers';
 import Navbar from "@/app/_components/navbar";
 
+const inter = Inter({ subsets: ["latin"] });
 import { hedvig } from "@/utils/fonts";
 
 export const metadata: Metadata = {
