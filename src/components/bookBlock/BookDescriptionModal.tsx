@@ -1,17 +1,17 @@
-"use client";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { useState, useEffect } from "react";
-import { resolve } from "path";
-import { IoBookOutline } from "react-icons/io5";
-import { IoMdTime } from "react-icons/io";
-import { FaRegSquare } from "react-icons/fa";
-import { FaRegCheckSquare } from "react-icons/fa";
 
 import { Book as BookType } from "@prisma/client";
-import BookDescriptionModal from "./BookDescriptionModal";
+import { IoBookOutline } from "react-icons/io5";
+import { IoMdTime } from "react-icons/io";
+import { FaRegCheckSquare, FaRegSquare } from "react-icons/fa";
 
-type BookBlockProps = {
+type BookDescriptionModalProps = {
+  book: {
+    created_at: Date;
+  };
   bookId: number;
+  onClose: () => void;
 };
 
 const calculateHoursAgo = (createdAt: Date) => {
@@ -24,62 +24,58 @@ const calculateHoursAgo = (createdAt: Date) => {
   return hoursAgo;
 };
 
-const BookBlock: React.FC<BookBlockProps> = ({bookId}) => {
+const BookDescriptionModal: React.FC<BookDescriptionModalProps> = ({
+  onClose,
+  bookId,
+}) => {
   const [book, setBook] = useState<BookType | null>(null);
   const [liked, setLiked] = useState(false);
-  const [showDescriptionModal, setShowDescriptionModal] = useState(false);
 
   useEffect(() => {
     fetch(`/api/book/${bookId}`)
       .then((response) => response.json())
       .then((data) => setBook(data))
       .catch((error) => console.error("Error fetching book:", error));
-  }, [bookId]);
-
-  if (!book) {
-    return <div>Loading...</div>;
-  }
+  }, []);
 
   const handleLikeClick = () => {
     setLiked(!liked);
   };
 
-  const handleOpenDescriptionModal = () => {
-    setShowDescriptionModal(true);
+  const handleCloseClick = () => {
+    onClose();
   };
 
-  const handleCloseDescriptionModal = () => {
-    setShowDescriptionModal(false);
-  };
-
-  console.log(book.cover_picture);
+  if (!book) {
+    return <div>Loading...</div>;
+  }
   return (
-    <section className="flex w-full my-6">
-      <div className=" flex bg-white border-purple-300 border-4 ">
+    <div className="fixed -top-[150px] -right-[450px] w-full h-screen flex items-center justify-center">
+      <div className="relative flex items-center justify-center bg-white border-8 border-purple-200">
+        <button
+          onClick={handleCloseClick}
+          className="absolute top-0 right-0 mr-2 text-black cursor-pointer"
+        >
+          <span className="text-5xl">×</span>
+        </button>
         <div className="w-1/3 bg-purple-200">
           <Image
-            onClick={handleOpenDescriptionModal}
             src={`/${book.cover_picture}`}
             alt={book.title}
             width={300}
             height={400}
           />
         </div>
-        <div className="w-2/3 flex flex-col items-start space-y-2 p-8">
-          <p
-            className="text-xl font-bold text-purple-900 mx-auto"
-            onClick={handleOpenDescriptionModal}
-          >
+        <div className="w-2/3 flex flex-col items-start space-y-2 px-8">
+          <p className="mx-auto text-xl font-bold text-purple-900 mb-2">
             {book.title}
           </p>
-          <p className="mx-auto font-semibold">
+          <p className="mx-auto font-semibold text-purple-900">
             by{" "}
-            <a className="text-purple-900">
-              {book.authors &&
-                book.authors.map((author) => author.name).join(", ")}
-            </a>
+            {book.authors &&
+              book.authors.map((author) => author.name).join(", ")}
           </p>
-          <p className="font-medium">{book.description}</p>
+          <p className="font-medium">{book.long_description}</p>
           <ul className="flex py-4 items-center space-x-8 font-medium">
             <li className="flex items-center space-x-2">
               <IoBookOutline className="text-3xl" />
@@ -114,18 +110,14 @@ const BookBlock: React.FC<BookBlockProps> = ({bookId}) => {
           <div className="bg-purple-200 rounded-full py-2 px-4 shadow-md text-purple-800">
             {book.tags && book.tags.map((tag) => tag.name).join(", ")}
           </div>
-
+          <div className="flex-col pt-4">
+            <p className="font-bold">Reviews</p>
+            <div></div>
+          </div>
         </div>
-                  {showDescriptionModal && (
-            <BookDescriptionModal
-            bookId={bookId}
-              book={book}
-              onClose={handleCloseDescriptionModal}
-            />
-          )}
       </div>
-    </section>
+    </div>
   );
 };
 
-export default BookBlock;
+export default BookDescriptionModal;

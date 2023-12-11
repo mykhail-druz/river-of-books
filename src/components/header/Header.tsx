@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { IoMdCompass } from "react-icons/io";
 import { FaStar } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [activeItem, setActiveItem] = useState<number | null>(null);
@@ -20,39 +21,30 @@ const Header = () => {
               activeItem === 0 ? "bg-purple-200" : "hover:bg-purple-100"
             } rounded-tl-box rounded-bl-box border-r border-gray-400`}
           >
-            <a
-              className="my-0.5 font-bold"
-              onClick={() => handleItemClick(0)}
-            >
+            <Link to="/" className="my-0.5 font-bold" onClick={() => handleItemClick(0)}>
               <IoMdCompass className="text-purple-900" />
               Discover
-            </a>
+            </Link>
           </li>
           <li
             className={`group ${
               activeItem === 1 ? "bg-purple-200" : "hover:bg-purple-100"
             }`}
           >
-            <a
-              className="my-0.5 font-bold "
-              onClick={() => handleItemClick(1)}
-            >
+            <Link to="/shelved" className="my-0.5 font-bold" onClick={() => handleItemClick(1)}>
               <FaStar className="text-purple-900" />
               Shelved
-            </a>
+            </Link>
           </li>
           <li
             className={`group ${
               activeItem === 2 ? "bg-purple-200" : "hover:bg-purple-100"
             } rounded-tr-box rounded-br-box border-l border-gray-400`}
           >
-            <a
-              className="my-0.5 font-bold"
-              onClick={() => handleItemClick(2)}
-            >
+            <Link to="/profile" className="my-0.5 font-bold" onClick={() => handleItemClick(2)}>
               <FaUserCircle className="text-purple-900" />
               Profile
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
@@ -61,4 +53,3 @@ const Header = () => {
 };
 
 export default Header;
-
