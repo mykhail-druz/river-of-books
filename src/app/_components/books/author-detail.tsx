@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { Author, Book } from "@prisma/client";
-import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 type AuthorDetailProps = {
   authorId: number;
@@ -59,20 +59,18 @@ export const AuthorDetail = ({ authorId }: AuthorDetailProps) => {
           />
         </svg>
       </div>
-      <div className="flex items-center">
-        <div className="relative w-64 h-72 mr-6 border rounded-md overflow-hidden">
+      <h1 className="mb-6 text-3xl font-bold text-gray-800">{author.name}</h1>
+      <div className="flex flex-col md:flex-row md:items-start">
+        <div className="relative w-full md:w-96 h-96 mb-6 md:mr-6 rounded-md overflow-hidden">
           <Image
             src={author.portrait}
             alt={author.name}
             fill
-            sizes="cover"
+            style={{ objectFit: "cover" }}
             className="rounded-md"
           />
         </div>
         <div>
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            {author.name}
-          </h1>
           <p className="text-gray-700 mb-4">{author.description}</p>
 
           <div className="text-blue-500 mb-4">
@@ -95,12 +93,43 @@ export const AuthorDetail = ({ authorId }: AuthorDetailProps) => {
       </div>
       <hr className="my-6 border-t border-gray-300" />
       <div>
-        <h2 className="text-gray-800 text-xl font-semibold">Books</h2>
-        <ul className="text-gray-600">
-          {author.books?.map((book) => <li key={book.id}>{book.title}</li>) ?? (
-            <li>No books available</li>
-          )}
-        </ul>
+        <h2 className="text-gray-800 text-xl font-semibold mb-4">Books</h2>
+        <div className="grid grid-cols-2 gap-4">
+          {author.books?.map((book) => (
+            <Link key={book.id} href={`/book/${book.id}`}>
+              <div
+                className="bg-gray-50 p-6 rounded-md shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 flex flex-col items-center"
+                style={{ height: "500px", width: "400px"}}
+              >
+                <div className="relative w-[300px] h-[350px] mb-4">
+                  <Image
+                    src={book.cover_picture}
+                    alt={book.title}
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-md"
+                  />
+                </div>
+                <h2
+                  className="text-2xl font-bold text-gray-800 mb-2 text-center"
+                  style={{ overflow: "hidden" }}
+                >
+                  {book.title}
+                </h2>
+                <p
+                  className="text-gray-700 text-center"
+                  style={{
+                    maxHeight: "4rem",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                >
+                  {book.description}
+                </p>
+              </div>
+            </Link>
+          )) ?? <div>No books available</div>}
+        </div>
       </div>
     </div>
   );
