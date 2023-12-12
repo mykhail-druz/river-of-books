@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Author, Book } from "@prisma/client";
+import { Author, Book, Tag } from "@prisma/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 type AuthorDetailProps = {
   authorId: number;
@@ -14,6 +15,7 @@ export const AuthorDetail = ({ authorId }: AuthorDetailProps) => {
   const [author, setAuthor] = useState<(Author & { books: Book[] }) | null>(
     null
   );
+  const [uniqueTags, setUniqueTags] = useState<string[]>([]);
   const navigation = useRouter();
 
   useEffect(() => {
@@ -25,6 +27,7 @@ export const AuthorDetail = ({ authorId }: AuthorDetailProps) => {
         }
         const data = await response.json();
         setAuthor(data);
+        setUniqueTags(getUniqueTags(data.books));
       } catch (error) {
         console.error("Error fetching author data:", error);
       }
@@ -33,12 +36,17 @@ export const AuthorDetail = ({ authorId }: AuthorDetailProps) => {
     fetchAuthorData();
   }, [authorId]);
 
+  const getUniqueTags = (books: Book[]): string[] => {
+    const allTags = books.flatMap((book) => book.tags.map((tag) => tag.name));
+    return Array.from(new Set(allTags));
+  };
+
   if (!author) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="mt-8 p-6 bg-white rounded-md shadow-md max-w-screen-xl mx-auto">
+    <div className="mt-8 p-2 md:p-6 bg-white rounded-md shadow-md max-w-screen-xl mx-auto">
       <div
         className="text-gray-800 mb-4 cursor-pointer"
         onClick={() => navigation.back()}
@@ -61,7 +69,7 @@ export const AuthorDetail = ({ authorId }: AuthorDetailProps) => {
       </div>
       <h1 className="mb-6 text-3xl font-bold text-gray-800">{author.name}</h1>
       <div className="flex flex-col md:flex-row md:items-start">
-        <div className="relative w-full md:w-96 h-96 mb-6 md:mr-6 rounded-md overflow-hidden">
+        <div className="relative w-96 h-96 mb-6 md:mr-6 rounded-md overflow-hidden">
           <Image
             src={author.portrait}
             alt={author.name}
@@ -72,19 +80,15 @@ export const AuthorDetail = ({ authorId }: AuthorDetailProps) => {
         </div>
         <div>
           <p className="text-gray-700 mb-4">{author.description}</p>
-
           <div className="text-blue-500 mb-4">
-            {/* {author.tags.map((tag) => (
-            <span
-              key={tag.id}
-              className="inline-block bg-blue-200 text-blue-800 px-2 py-1 mr-2 rounded"
-            >
-              {tag.name}
-            </span>
-          ))} */}
-            <span className="inline-block bg-blue-200 text-blue-800 px-2 py-1 mr-2 rounded">
-              TODO: Author topics tags :)
-            </span>
+            {uniqueTags.map((tagName, index) => (
+              <span
+                key={index}
+                className="inline-block bg-blue-200 text-blue-800 px-2 py-1 mr-2 rounded"
+              >
+                {tagName}
+              </span>
+            ))}
           </div>
           <div className="text-gray-700 mb-2">
             <strong>Book Count:</strong> {author.books.length}
@@ -94,14 +98,11 @@ export const AuthorDetail = ({ authorId }: AuthorDetailProps) => {
       <hr className="my-6 border-t border-gray-300" />
       <div>
         <h2 className="text-gray-800 text-xl font-semibold mb-4">Books</h2>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-2 gap-4 items-center justify-center">
           {author.books?.map((book) => (
             <Link key={book.id} href={`/book/${book.id}`}>
-              <div
-                className="bg-gray-50 p-6 rounded-md shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 flex flex-col items-center"
-                style={{ height: "500px", width: "400px"}}
-              >
-                <div className="relative w-[300px] h-[350px] mb-4">
+              <div className="bg-gray-50 sm:p-2 md:p-6 rounded-md w-[360px] h-[450px] md:w-[400px] md:h-[500px] shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 flex flex-col items-center">
+                <div className="relative w-[300px] sm:w-full h-[350px] sm:h-64 mb-4">
                   <Image
                     src={book.cover_picture}
                     alt={book.title}
@@ -128,7 +129,7 @@ export const AuthorDetail = ({ authorId }: AuthorDetailProps) => {
                 </p>
               </div>
             </Link>
-          )) ?? <div>No books available</div>}
+          ))}
         </div>
       </div>
     </div>
