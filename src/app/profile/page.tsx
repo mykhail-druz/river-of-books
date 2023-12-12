@@ -17,7 +17,7 @@ export default async function Profile() {
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            <ul className="menu bg-base-200 rounded-box">
+            <ul className="menu space-y-1 bg-base-200 rounded-box">
                 <Link className="btn rounded-full btn-outline" href={"/profile/user"}>
                     <FaEdit className="text-purple-900"/>
                     Profile

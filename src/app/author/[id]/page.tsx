@@ -8,14 +8,18 @@ type AuthorProps = {
 };
 
 const Author = async ({ params }: AuthorProps) => {
-  const author = await getAuthor(Number(params.id));
+  const authorId = Number(params.id);
+  if (isNaN(authorId)) {
+    return <p>Invalid author ID</p>;
+  }
+
+  const author = await getAuthor(authorId);
 
   return (
     <>
-    {author !== null && <AuthorDetail author={author!}/>}
-    {author === null && <p>Author was not found</p>}
+      {author !== null ? <AuthorDetail authorId={author.id}/> : <p>Author not found</p>}
     </>
-    );
+  );
 };
 
 export default Author;

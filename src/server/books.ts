@@ -75,3 +75,11 @@ export const addReview = async (review: BookReview) => {
     },
   });
 };
+
+export const deleteBook = async (id: number) => {
+  return await db.book.delete({
+    where: {
+      id: id
+    }
+  });
+}

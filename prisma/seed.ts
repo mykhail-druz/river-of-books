@@ -1,9 +1,9 @@
 const {PrismaClient} = require('@prisma/client');
-const prisma = new PrismaClient()
+const seedPrisma = new PrismaClient()
 
 async function main() {
     // Create authors
-  const tolkien = await prisma.author.create({
+  const tolkien = await seedPrisma.author.create({
     data: {
       name: 'J.R.R. Tolkien',
       description: 'English writer, poet, and philologist',
@@ -12,7 +12,7 @@ async function main() {
   });
 
   // Create tags
-  const fantasyTag = await prisma.tag.create({
+  const fantasyTag = await seedPrisma.tag.create({
     data: {
       name: 'Fantasy',
       description: 'Books with fantastical elements',
@@ -20,7 +20,7 @@ async function main() {
   });
 
   // Create books
-  const lordOfTheRings = await prisma.book.create({
+  const lordOfTheRings = await seedPrisma.book.create({
     data: {
       title: 'The Lord of the Rings',
       cover_picture: 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71jLBXtWJWL._AC_UF1000,1000_QL80_.jpg', // Replace with the actual file path
@@ -36,7 +36,7 @@ async function main() {
     },
   });
 
-  const theHobbit = await prisma.book.create({
+  const theHobbit = await seedPrisma.book.create({
     data: {
       title: 'The Hobbit',
       cover_picture: 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/710+HcoP38L._AC_UF1000,1000_QL80_.jpg', // Replace with the actual file path
@@ -53,7 +53,7 @@ async function main() {
   });
 
   // Create users
-  const user1 = await prisma.user.create({
+  const user1 = await seedPrisma.user.create({
     data: {
       // username: 'user1',
       // password: 'password1',
@@ -74,7 +74,7 @@ async function main() {
     },
   });
 
-  const user2 = await prisma.user.create({
+  const user2 = await seedPrisma.user.create({
     data: {
       // username: 'user2',
       // password: 'password2',
@@ -95,7 +95,7 @@ async function main() {
     },
   });
 
-  const user3 = await prisma.user.create({
+  const user3 = await seedPrisma.user.create({
     data: {
       // username: 'user3',
       // password: 'password3',
@@ -119,7 +119,7 @@ async function main() {
     },
   });
 
-  const jkRowling = await prisma.author.create({
+  const jkRowling = await seedPrisma.author.create({
     data: {
       name: 'J.K. Rowling',
       description: 'Author of the Harry Potter series',
@@ -127,7 +127,7 @@ async function main() {
     },
   });
 
-  const georgeMartin = await prisma.author.create({
+  const georgeMartin = await seedPrisma.author.create({
     data: {
       name: 'George R.R. Martin',
       description: 'Author of A Song of Ice and Fire series',
@@ -135,7 +135,7 @@ async function main() {
     },
   });
 
-  const andrzejSapkowski = await prisma.author.create({
+  const andrzejSapkowski = await seedPrisma.author.create({
     data: {
       name: 'Andrzej Sapkowski',
       description: 'Author of The Witcher series',
@@ -144,7 +144,7 @@ async function main() {
   });
 
   // Create books
-  const harryPotter = await prisma.book.create({
+  const harryPotter = await seedPrisma.book.create({
     data: {
       title: 'Harry Potter and the Sorcerer\'s Stone',
       cover_picture: 'https://m.media-amazon.com/images/I/81Fyh2mrw4L._AC_UF1000,1000_QL80_.jpg', // Add the actual file path or URL
@@ -160,7 +160,7 @@ async function main() {
     },
   });
 
-  const songOfIceAndFire = await prisma.book.create({
+  const songOfIceAndFire = await seedPrisma.book.create({
     data: {
       title: 'A Game of Thrones',
       cover_picture: 'https://upload.wikimedia.org/wikipedia/en/d/dc/A_Song_of_Ice_and_Fire_book_collection_box_set_cover.jpg', // Add the actual file path or URL
@@ -176,7 +176,7 @@ async function main() {
     },
   });
 
-  const theWitcher = await prisma.book.create({
+  const theWitcher = await seedPrisma.book.create({
     data: {
       title: 'The Last Wish',
       cover_picture: 'https://images2.minutemediacdn.com/image/fetch/c_fill,g_auto,f_auto,h_2047,w_1328/https%3A%2F%2Fwinteriscoming.net%2Ffiles%2Fimage-exchange%2F2023%2F06%2Fie_104309.jpeg', // Add the actual file path or URL
@@ -192,7 +192,7 @@ async function main() {
     },
   });
 
-  const harryPotter2 = await prisma.book.create({
+  const harryPotter2 = await seedPrisma.book.create({
     data: {
       title: 'Harry Potter and the Chamber of Secrets',
       cover_picture: 'https://m.media-amazon.com/images/I/81gOJoEgVoL._AC_UF1000,1000_QL80_.jpg', // Add the actual file path or URL
@@ -208,7 +208,7 @@ async function main() {
     },
   });
 
-  const songOfIceAndFire2 = await prisma.book.create({
+  const songOfIceAndFire2 = await seedPrisma.book.create({
     data: {
       title: 'A Clash of Kings',
       cover_picture: 'https://m.media-amazon.com/images/I/51ilVSflSkL.jpg', // Add the actual file path or URL
@@ -224,7 +224,7 @@ async function main() {
     },
   });
 
-  const theWitcher2 = await prisma.book.create({
+  const theWitcher2 = await seedPrisma.book.create({
     data: {
       title: 'Sword of Destiny',
       cover_picture: 'https://prodimage.images-bn.com/pimages/9780316453264_p0_v7_s1200x630.jpg', // Add the actual file path or URL
@@ -240,7 +240,7 @@ async function main() {
     },
   });
 
-  const harryPotter3 = await prisma.book.create({
+  const harryPotter3 = await seedPrisma.book.create({
     data: {
       title: 'Harry Potter and the Prisoner of Azkaban',
       cover_picture: 'https://www.knihydobrovsky.cz/thumbs/book-detail/mod_eshop/produkty/h/harry-potter-and-the-prisoner-of-azkaban-9781408855676.jpg', // Add the actual file path or URL
@@ -256,7 +256,7 @@ async function main() {
     },
   });
 
-  const songOfIceAndFire3 = await prisma.book.create({
+  const songOfIceAndFire3 = await seedPrisma.book.create({
     data: {
       title: 'A Storm of Swords',
       cover_picture: 'https://images.penguinrandomhouse.com/cover/9780593158951', // Add the actual file path or URL
@@ -272,7 +272,7 @@ async function main() {
     },
   });
 
-  const theWitcher3 = await prisma.book.create({
+  const theWitcher3 = await seedPrisma.book.create({
     data: {
       title: 'Blood of Elves',
       cover_picture: 'https://www.knihydobrovsky.cz/thumbs/book-detail/mod_eshop/produkty/221868237/16.jpg', // Add the actual file path or URL
@@ -291,10 +291,10 @@ async function main() {
 
 main()
   .then(async () => {
-    await prisma.$disconnect()
+    await seedPrisma.$disconnect()
   })
   .catch(async (e) => {
     console.error(e)
-    await prisma.$disconnect()
+    await seedPrisma.$disconnect()
     process.exit(1)
   })

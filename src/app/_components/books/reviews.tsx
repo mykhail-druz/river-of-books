@@ -1,21 +1,25 @@
 import { BookReview } from "@prisma/client";
-import RatingStars from "./rating-stars";
+import ReviewItem from "./review-item";
+import { getNames as getUsers } from "@/server/user";
 
-export const Reviews = ({ reviews }: { reviews: BookReview[] }) => {
+export const Reviews = async ({ reviews }: { reviews: BookReview[] }) => {
+  const userIds: number[] = reviews.map(r => r.user_id);
+  const users = await getUsers(userIds);
+  const reviewsWithNames: ({
+    name: string;
+    review: BookReview;
+  })[] = reviews.map(r => {
+    return {
+      name: users.find(u => u.id == r.user_id)?.name ?? "User",
+      review: r
+    }
+  })
+
   return (
     <>
-      {reviews.map((review) => (
-        <div key={review.id} className="mb-4">
-          <div className="flex items-center justify-between mb-2">
-            <div className="text-gray-800">
-              <strong>{review.user_id}</strong>
-            </div>
-            <RatingStars rating={review.rating} />
-            <div className="text-gray-600">
-              {new Date(review.created_at).toLocaleDateString()}
-            </div>
-          </div>
-          <p className="text-gray-700">{review.review}</p>
+      {reviewsWithNames.map((reviewsWithName) => (
+        <div key={reviewsWithName.review.id} className="mb-4">
+          <ReviewItem review={reviewsWithName.review} userName={reviewsWithName.name} />
         </div>
       ))}
     </>

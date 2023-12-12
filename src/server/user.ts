@@ -1,5 +1,5 @@
 import db from "@/server/db";
-import {Role, User} from "@prisma/client";
+import {Book, Role, User} from "@prisma/client";
 
 export const getUserById = async (_id: number) => {
     return await db.user.findUniqueOrThrow({
@@ -25,14 +25,13 @@ export const updateUserById = async (_id: number, user: User) => {
     });
 }
 
-export const getName = async (id: number) => {
-    const user = await db.user.findUnique({
+export const getNames = async (ids: number[]) => {
+    const users: User[] = await db.user.findMany({
         where: {
-            id: id
+            id: {in: ids }
         }
     });
-
-    return user?.name;
+    return users;
 }
 
 export const isUserAdmin = async (id: number) => {
@@ -51,11 +50,15 @@ export const getShelvedBooks = async (userId: number) => {
             id: userId
         },
         include: {
-            shelved: true
+            shelved: {
+                include: {
+                    tags: true,
+                    authors: true
+                }
+            }
         }
     });
-
-    return user?.shelved;
+    return user!.shelved!;
 }
 
 export const shelveBook = async (bookId: number, userId: number) => {
@@ -74,4 +77,39 @@ export const shelveBook = async (bookId: number, userId: number) => {
             shelved: true
         }
     })
+}
+
+export const unshelveBook = async (bookId: number, userId: number) => {
+    await db.user.update({
+        where: {
+            id: userId,
+        },
+        data: {
+            shelved: {
+                disconnect: {
+                    id: bookId
+                }
+            }
+        },
+        include: {
+            shelved: true
+        }
+    })
+}
+
+export const isBookShelved = async (bookId: number, userId: number) => {
+    const user = await db.user.findUnique({
+        where: {
+            id: userId
+        },
+        include: {
+            shelved:true
+        }
+    });
+
+    if (user?.shelved.find((sb: Book) => sb.id == bookId)) {
+        return true;
+    };
+
+    return false;
 }

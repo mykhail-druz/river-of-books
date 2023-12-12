@@ -1,17 +1,64 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { Author, Book } from "@prisma/client";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 type AuthorDetailProps = {
-  author: Author & { books: Book[] };
+  authorId: number;
 };
 
-export const AuthorDetail = ({ author }: AuthorDetailProps) => {
+export const AuthorDetail = ({ authorId }: AuthorDetailProps) => {
+  const [author, setAuthor] = useState<(Author & { books: Book[] }) | null>(
+    null
+  );
+  const navigation = useRouter();
+
+  useEffect(() => {
+    const fetchAuthorData = async () => {
+      try {
+        const response = await fetch(`/api/author?id=${authorId}`);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setAuthor(data);
+      } catch (error) {
+        console.error("Error fetching author data:", error);
+      }
+    };
+
+    fetchAuthorData();
+  }, [authorId]);
+
+  if (!author) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className="p-6 bg-white rounded-md shadow-md">
-      <Link href="">
-        <div className="text-blue-500 mb-4 block">← Back to Book</div>
-      </Link>
+    <div className="mt-8 p-6 bg-white rounded-md shadow-md max-w-screen-xl mx-auto">
+      <div
+        className="text-gray-800 mb-4 cursor-pointer"
+        onClick={() => navigation.back()}
+      >
+        {" "}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          className="h-6 w-6 mr-2"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
+          />
+        </svg>
+      </div>
       <div className="flex items-center">
         <div className="relative w-64 h-72 mr-6 border rounded-md overflow-hidden">
           <Image
@@ -38,12 +85,11 @@ export const AuthorDetail = ({ author }: AuthorDetailProps) => {
             </span>
           ))} */}
             <span className="inline-block bg-blue-200 text-blue-800 px-2 py-1 mr-2 rounded">
-              TODO: Author's topics tags :)
+              TODO: Author topics tags :)
             </span>
           </div>
           <div className="text-gray-700 mb-2">
-            <strong>Book Count:</strong> TODO: Book count :)
-            {/* {author.book_count} */}
+            <strong>Book Count:</strong> {author.books.length}
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ const UserProfile = async () => {
     const status = await getServerAuthSession();
     if (!status) {
         // User unauthenticated, redirect to home
-        redirect('/');
+        redirect('/discover');
     }
     return <UserProfileForm user={await getUserById(parseInt(status.user.id))}/>
 };

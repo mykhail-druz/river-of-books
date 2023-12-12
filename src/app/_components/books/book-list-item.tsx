@@ -19,8 +19,8 @@ export const BookItem = ({
           <Image
             src={book.cover_picture}
             alt={book.title}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: "cover" }}
             className="rounded-md"
           />
         </div>

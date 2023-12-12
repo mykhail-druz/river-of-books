@@ -41,6 +41,8 @@ export const AddReview = ({
   };
 
   return (
+    <>
+    <div className="text-xl font-semibold mb-4">Add your review:</div>
     <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col gap-3 p-6 border border-gray-300 rounded-md">
       <div className="rating">
         <input
@@ -88,5 +90,6 @@ export const AddReview = ({
         Add Review
       </button>
     </form>
+    </>
   );
 };
