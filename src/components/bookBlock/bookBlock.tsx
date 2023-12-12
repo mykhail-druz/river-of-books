@@ -10,6 +10,8 @@ import { Dispatch, SetStateAction } from "react";
 import { Book as BookType } from "@prisma/client";
 import BookDescriptionModal from "./BookDescriptionModal";
 import AuthorModal from "../authorBlock/AuthorModal";
+import async from '../../app/api/shelved/route';
+import { getAllBooks } from "@/server/books";
 
 type BookBlockProps = {
   bookId: number;
@@ -31,6 +33,10 @@ const BookBlock: React.FC<BookBlockProps> = ({ bookId }) => {
   const [liked, setLiked] = useState(false);
   const [showDescriptionModal, setShowDescriptionModal] = useState(false);
   const [showAuthorModal, setShowAuthorModal] = useState(false);
+
+  const allBooks = getAllBooks(0, 11)
+
+  console.log(allBooks)
 
   useEffect(() => {
     fetch(`/api/book/${bookId}`)
