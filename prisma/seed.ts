@@ -7,7 +7,7 @@ async function main() {
     data: {
       name: 'J.R.R. Tolkien',
       description: 'English writer, poet, and philologist',
-      portrait: 'tolkien.jpg', // Replace with the actual file path
+      portrait: 'https://ilrdb.com/images/28/1677785736.png', // Replace with the actual file path
     },
   });
 
@@ -23,7 +23,7 @@ async function main() {
   const lordOfTheRings = await prisma.book.create({
     data: {
       title: 'The Lord of the Rings',
-      cover_picture: 'lotr.jpg', // Replace with the actual file path
+      cover_picture: 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71jLBXtWJWL._AC_UF1000,1000_QL80_.jpg', // Replace with the actual file path
       description: 'Epic high fantasy novel',
       long_description: 'The Lord of the Rings is a high-fantasy novel written by J.R.R. Tolkien.',
       page_count: 1178,
@@ -39,7 +39,7 @@ async function main() {
   const theHobbit = await prisma.book.create({
     data: {
       title: 'The Hobbit',
-      cover_picture: 'hobbit.jpg', // Replace with the actual file path
+      cover_picture: 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/710+HcoP38L._AC_UF1000,1000_QL80_.jpg', // Replace with the actual file path
       description: 'Fantasy novel',
       long_description: 'The Hobbit is a fantasy novel written by J.R.R. Tolkien.',
       page_count: 310,
@@ -123,7 +123,7 @@ async function main() {
     data: {
       name: 'J.K. Rowling',
       description: 'Author of the Harry Potter series',
-      portrait: 'jk_rowling.jpg', // Add the actual file path or URL
+      portrait: 'https://hips.hearstapps.com/hmg-prod/images/gettyimages-1061157246.jpg', // Add the actual file path or URL
     },
   });
 
@@ -131,7 +131,7 @@ async function main() {
     data: {
       name: 'George R.R. Martin',
       description: 'Author of A Song of Ice and Fire series',
-      portrait: 'george_martin.jpg', // Add the actual file path or URL
+      portrait: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Portrait_photoshoot_at_Worldcon_75%2C_Helsinki%2C_before_the_Hugo_Awards_%E2%80%93_George_R._R._Martin.jpg/1200px-Portrait_photoshoot_at_Worldcon_75%2C_Helsinki%2C_before_the_Hugo_Awards_%E2%80%93_George_R._R._Martin.jpg', // Add the actual file path or URL
     },
   });
 
@@ -139,7 +139,7 @@ async function main() {
     data: {
       name: 'Andrzej Sapkowski',
       description: 'Author of The Witcher series',
-      portrait: 'andrzej_sapkowski.jpg', // Add the actual file path or URL
+      portrait: 'https://upload.wikimedia.org/wikipedia/commons/e/ec/Andrzej_Sapkowski_-_Book_World_Fair_2010_Prague.jpg', // Add the actual file path or URL
     },
   });
 
@@ -147,7 +147,7 @@ async function main() {
   const harryPotter = await prisma.book.create({
     data: {
       title: 'Harry Potter and the Sorcerer\'s Stone',
-      cover_picture: 'harry_potter.jpg', // Add the actual file path or URL
+      cover_picture: 'https://m.media-amazon.com/images/I/81Fyh2mrw4L._AC_UF1000,1000_QL80_.jpg', // Add the actual file path or URL
       description: 'The first book in the Harry Potter series',
       long_description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       page_count: 336,
@@ -163,7 +163,7 @@ async function main() {
   const songOfIceAndFire = await prisma.book.create({
     data: {
       title: 'A Game of Thrones',
-      cover_picture: 'song_of_ice_and_fire.jpg', // Add the actual file path or URL
+      cover_picture: 'https://upload.wikimedia.org/wikipedia/en/d/dc/A_Song_of_Ice_and_Fire_book_collection_box_set_cover.jpg', // Add the actual file path or URL
       description: 'The first book in A Song of Ice and Fire series',
       long_description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       page_count: 694,
@@ -179,7 +179,7 @@ async function main() {
   const theWitcher = await prisma.book.create({
     data: {
       title: 'The Last Wish',
-      cover_picture: 'the_witcher.jpg', // Add the actual file path or URL
+      cover_picture: 'https://images2.minutemediacdn.com/image/fetch/c_fill,g_auto,f_auto,h_2047,w_1328/https%3A%2F%2Fwinteriscoming.net%2Ffiles%2Fimage-exchange%2F2023%2F06%2Fie_104309.jpeg', // Add the actual file path or URL
       description: 'The first book in The Witcher series',
       long_description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       page_count: 292,
@@ -195,7 +195,7 @@ async function main() {
   const harryPotter2 = await prisma.book.create({
     data: {
       title: 'Harry Potter and the Chamber of Secrets',
-      cover_picture: 'harry_potter_2.jpg', // Add the actual file path or URL
+      cover_picture: 'https://m.media-amazon.com/images/I/81gOJoEgVoL._AC_UF1000,1000_QL80_.jpg', // Add the actual file path or URL
       description: 'The second book in the Harry Potter series',
       long_description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       page_count: 384,
@@ -211,7 +211,7 @@ async function main() {
   const songOfIceAndFire2 = await prisma.book.create({
     data: {
       title: 'A Clash of Kings',
-      cover_picture: 'song_of_ice_and_fire_2.jpg', // Add the actual file path or URL
+      cover_picture: 'https://m.media-amazon.com/images/I/51ilVSflSkL.jpg', // Add the actual file path or URL
       description: 'The second book in A Song of Ice and Fire series',
       long_description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       page_count: 768,
@@ -227,7 +227,7 @@ async function main() {
   const theWitcher2 = await prisma.book.create({
     data: {
       title: 'Sword of Destiny',
-      cover_picture: 'the_witcher_2.jpg', // Add the actual file path or URL
+      cover_picture: 'https://prodimage.images-bn.com/pimages/9780316453264_p0_v7_s1200x630.jpg', // Add the actual file path or URL
       description: 'The second book in The Witcher series',
       long_description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       page_count: 384,
@@ -243,7 +243,7 @@ async function main() {
   const harryPotter3 = await prisma.book.create({
     data: {
       title: 'Harry Potter and the Prisoner of Azkaban',
-      cover_picture: 'harry_potter_3.jpg', // Add the actual file path or URL
+      cover_picture: 'https://www.knihydobrovsky.cz/thumbs/book-detail/mod_eshop/produkty/h/harry-potter-and-the-prisoner-of-azkaban-9781408855676.jpg', // Add the actual file path or URL
       description: 'The third book in the Harry Potter series',
       long_description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       page_count: 448,
@@ -259,7 +259,7 @@ async function main() {
   const songOfIceAndFire3 = await prisma.book.create({
     data: {
       title: 'A Storm of Swords',
-      cover_picture: 'song_of_ice_and_fire_3.jpg', // Add the actual file path or URL
+      cover_picture: 'https://images.penguinrandomhouse.com/cover/9780593158951', // Add the actual file path or URL
       description: 'The third book in A Song of Ice and Fire series',
       long_description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       page_count: 992,
@@ -275,7 +275,7 @@ async function main() {
   const theWitcher3 = await prisma.book.create({
     data: {
       title: 'Blood of Elves',
-      cover_picture: 'the_witcher_3.jpg', // Add the actual file path or URL
+      cover_picture: 'https://www.knihydobrovsky.cz/thumbs/book-detail/mod_eshop/produkty/221868237/16.jpg', // Add the actual file path or URL
       description: 'The third book in The Witcher series',
       long_description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       page_count: 416,

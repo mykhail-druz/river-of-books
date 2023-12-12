@@ -1,10 +1,6 @@
-import BookBlock from "@/components/bookBlock/bookBlock";
-import LayoutPage from "@/layout/LayoutPage";
+import Image from "next/image";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-    return (
-        <LayoutPage>
-            <BookBlock/>
-        </LayoutPage>
-    )
+  return redirect('/discover');
 }
