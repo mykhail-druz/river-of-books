@@ -5,7 +5,6 @@ import { Author, Book, Tag } from "@prisma/client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 type AuthorDetailProps = {
   authorId: number;
@@ -46,7 +45,7 @@ export const AuthorDetail = ({ authorId }: AuthorDetailProps) => {
   }
 
   return (
-    <div className="mt-8 p-2 md:p-6 bg-white rounded-md shadow-md max-w-screen-xl mx-auto">
+    <div className="mt-8 p-6 bg-white rounded-md shadow-md max-w-screen-xl mx-auto overflow-hidden">
       <div
         className="text-gray-800 mb-4 cursor-pointer"
         onClick={() => navigation.back()}
@@ -67,9 +66,9 @@ export const AuthorDetail = ({ authorId }: AuthorDetailProps) => {
           />
         </svg>
       </div>
-      <h1 className="mb-6 text-3xl font-bold text-gray-800">{author.name}</h1>
+      <h1 className="mb-6 text-3xl font-bold text-gray-800 text-center md:text-start">{author.name}</h1>
       <div className="flex flex-col md:flex-row md:items-start">
-        <div className="relative w-96 h-96 mb-6 md:mr-6 rounded-md overflow-hidden">
+        <div className="relative w-[90%] h-72 md:w-96 md:h-96 mb-6 md:mr-6 rounded-md overflow-hidden mx-auto md:mx-0">
           <Image
             src={author.portrait}
             alt={author.name}
@@ -101,8 +100,8 @@ export const AuthorDetail = ({ authorId }: AuthorDetailProps) => {
         <div className="grid md:grid-cols-2 gap-4 items-center justify-center">
           {author.books?.map((book) => (
             <Link key={book.id} href={`/book/${book.id}`}>
-              <div className="bg-gray-50 sm:p-2 md:p-6 rounded-md w-[360px] h-[450px] md:w-[400px] md:h-[500px] shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 flex flex-col items-center">
-                <div className="relative w-[300px] sm:w-full h-[350px] sm:h-64 mb-4">
+              <div className="bg-gray-50 sm:p-2 md:p-6 rounded-md w-[80vw] h-[400px] md:w-[400px] md:h-[500px] shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 flex flex-col items-center">
+                <div className="relative w-[90%] h-64 md:w-[300px] md:h-[350px]  mb-4">
                   <Image
                     src={book.cover_picture}
                     alt={book.title}
